@@ -1,0 +1,2 @@
+Algorithm,Number of Clusters,Silhouette Score,Davies-Bouldin Index,Calinski-Harabasz Score
+Agglomerative (Ward),3,0.09095922682646684,2.4521687231456557,185.69467191361773

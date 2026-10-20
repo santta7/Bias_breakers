@@ -1,0 +1,2 @@
+Algorithm,Number of Clusters,Silhouette Score,Davies-Bouldin Index,Calinski-Harabasz Score
+K-Means,3,0.14354326016879332,1.9446180772426167,273.39718525082833

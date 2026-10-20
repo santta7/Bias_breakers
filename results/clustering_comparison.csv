@@ -1,0 +1,3 @@
+Algorithm,Number of Clusters,Silhouette Score,Davies-Bouldin Index,Calinski-Harabasz Score
+K-Means,3,0.1435432601687933,1.9446180772426167,273.3971852508284
+Agglomerative (Ward),3,0.09095922682646684,2.4521687231456557,185.69467191361773
