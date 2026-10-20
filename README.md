@@ -1,25 +1,102 @@
-# Bias Breakers – Machine Learning Algorithms
+# Bias Breakers — Machine Learning Capstone
 
-## Overview
+An end-to-end Machine Learning project covering **Regression, Classification, and Clustering**, with exploratory data analysis, data preprocessing, model training, performance evaluation, and an interactive Streamlit dashboard.
 
-This repository contains hands-on implementations and experimentation with supervised machine learning algorithms, covering both **regression** and **classification**. Each algorithm is implemented in its own Jupyter notebook, following a consistent workflow of exploratory data analysis, preprocessing, model training, hyperparameter tuning, and evaluation.
+## Project Overview
 
-## Table of Contents
+Bias Breakers explores multiple machine learning algorithms across three problem tracks. The project compares model performance using appropriate evaluation metrics and provides visualizations to support model analysis and interpretation.
 
-- [Project Structure](#project-structure)
-- [Regression](#regression)
-- [Classification](#classification)
-- [Dataset](#dataset)
-- [Technologies / Libraries](#technologies--libraries)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Learning Objectives](#learning-objectives)
-- [Future Improvements](#future-improvements)
-- [License](#license)
+### Objectives
 
-## Project Structure
+- Perform Exploratory Data Analysis (EDA) and understand dataset characteristics.
+- Handle missing values and preprocess features appropriately.
+- Train and compare multiple machine learning algorithms.
+- Evaluate models using relevant performance metrics.
+- Visualize distributions, relationships, model performance, and clusters.
+- Build an interactive web dashboard using Streamlit.
 
-```
+## Project Tracks
+
+### 1. Regression
+
+The regression track predicts a continuous target using insurance-related data.
+
+**Algorithms implemented:**
+
+1. Linear Regression
+2. Ridge Regression
+3. Lasso Regression
+4. ElasticNet Regression
+5. Polynomial Regression
+6. Decision Tree Regressor
+7. Random Forest Regressor
+8. Gradient Boosting Regressor
+9. Support Vector Regressor (SVR)
+10. K-Nearest Neighbors Regressor
+
+**Evaluation metrics:**
+- R² Score
+- Root Mean Squared Error (RMSE)
+- Mean Absolute Error (MAE)
+
+### 2. Classification
+
+The classification track uses diabetes-related data to predict the target class.
+
+**Algorithms implemented:**
+
+1. Logistic Regression
+2. K-Nearest Neighbors (KNN)
+3. Gaussian Naive Bayes
+4. Decision Tree Classifier
+5. Support Vector Machine (SVM)
+6. Random Forest Classifier
+7. AdaBoost Classifier
+8. Gradient Boosting Classifier
+9. Bagging Classifier
+10. Multilayer Perceptron (MLP) Classifier
+
+**Evaluation metrics:**
+- Accuracy
+- Precision
+- Recall
+- Weighted F1-score
+- Confusion Matrix
+- ROC-AUC score, where applicable
+
+### 3. Clustering
+
+The clustering track explores patient data using unsupervised learning techniques.
+
+**Algorithms implemented:**
+
+1. K-Means Clustering
+2. Agglomerative Hierarchical Clustering
+
+**Evaluation metrics and visualizations:**
+- Silhouette Score
+- Davies–Bouldin Index
+- Calinski–Harabasz Index
+- Elbow method for selecting the number of K-Means clusters
+- Dendrogram for hierarchical clustering
+- PCA-based two-dimensional cluster visualization
+- t-SNE visualization, where implemented
+
+## Datasets
+
+The project includes the following datasets:
+
+| Dataset | Purpose |
+|---|---|
+| `regression_insurance.csv` | Regression analysis |
+| `diabetes_prediction_dataset_2000.csv` | Classification analysis |
+| `clustering_patients.csv` | Patient-data clustering |
+
+The datasets are stored in the `dataset/` directory.
+
+## Repository Structure
+
+```text
 Bias_breakers/
 ├── dataset/
 │   ├── clustering_patients.csv
@@ -40,118 +117,109 @@ Bias_breakers/
 │   ├── classification2_KNN.ipynb
 │   ├── classification3_GNB.ipynb
 │   ├── classification4_DT.ipynb
-│   └── classification5_SVM.ipynb
+│   ├── classification5_SVM.ipynb
+│   ├── classification6_RF.ipynb
+│   ├── classification7_AdaBoost.ipynb
+│   ├── classification8_GBC.ipynb
+│   ├── classification9_Bagging.ipynb
+│   ├── classification10_MLP.ipynb
+│   ├── clustering1_KMeans.ipynb
+│   └── clustering2_Agglomerative.ipynb
+├── results/
+├── models/
+├── app.py
+├── ml_engine.py
 ├── requirements.txt
 └── README.md
 ```
 
-## Regression
+The `results/`, `models/`, and Streamlit configuration directories may contain additional files depending on the current implementation.
 
-All ten regression notebooks predict `charges` (medical insurance cost) from the `regression_insurance.csv` dataset. Each notebook follows the same pipeline: exploratory data analysis, IQR-based outlier capping on the input features, a `bmi_age` interaction feature, one-hot encoding of categorical columns (`sex`, `smoker`, `region`) with `pandas.get_dummies`, feature scaling with `StandardScaler`, hyperparameter search with `GridSearchCV`/`cross_val_score`, and evaluation with R², MSE, RMSE, and MAE.
+## Technologies Used
 
-| # | Notebook | Algorithm | Problem Type | Key Concepts Demonstrated |
-|---|----------|-----------|---------------|----------------------------|
-| 1 | `Regression01_LinearRegression.ipynb` | Linear Regression | Regression | Ordinary least squares fitting; establishes the baseline model with no hyperparameters, used as the reference point for the regularized variants |
-| 2 | `Regression02_ridgeRegression.ipynb` | Ridge Regression | Regression | L2 regularization; shrinking coefficients to reduce overfitting/multicollinearity |
-| 3 | `Regression03_lassoRegression.ipynb` | Lasso Regression | Regression | L1 regularization; automatic feature selection by shrinking weak coefficients to exactly zero |
-| 4 | `Regression04_elasticNetRegression.ipynb` | Elastic Net Regression | Regression | Combined L1/L2 penalty; tuning the `l1_ratio` to balance the two penalties |
-| 5 | `Regression05_polynomialRegression.ipynb` | Polynomial Regression | Regression | `PolynomialFeatures` to capture non-linear relationships and feature interactions; selecting the polynomial degree via cross-validation |
-| 6 | `Regression06_DecisionTree.ipynb` | Decision Tree Regression | Regression | Non-linear, rule-based splitting; capturing feature interactions without manual feature engineering |
-| 7 | `Regression07_RandomForest.ipynb` | Random Forest Regression | Regression | Ensemble of decision trees (bagging) to reduce variance and improve generalization |
-| 8 | `Regression08_GradientBoosting.ipynb` | Gradient Boosting Regression | Regression | Sequential ensemble (boosting) that fits new trees to the residual errors of prior trees |
-| 9 | `Regression09_SupportVector.ipynb` | Support Vector Regression | Regression | Kernel-based regression with an epsilon-insensitive margin; permutation importance for feature analysis |
-| 10 | `Regression10_KNN.ipynb` | KNN Regression | Regression | Distance-based, instance-based learning; predicting from the average of nearest neighbors; permutation importance for feature analysis |
+- **Language:** Python
+- **Data processing:** Pandas, NumPy
+- **Machine learning:** Scikit-learn
+- **Visualization:** Matplotlib, Seaborn, Plotly
+- **Scientific computing:** SciPy
+- **Development environment:** Jupyter Notebook
+- **Web application:** Streamlit
 
-## Classification
+## Installation and Setup
 
-All five classification notebooks predict `diabetes` (binary target) from the `diabetes_prediction_dataset_2000.csv` dataset. Each notebook follows the same pipeline: exploratory data analysis, IQR-based outlier checks on `bmi` and `blood_glucose_level`, a `glucose_hba1c_interaction` engineered feature, a `ColumnTransformer`/`Pipeline` with `OneHotEncoder` (categorical columns) and `StandardScaler` (numeric columns), a stratified train/test split, and evaluation with accuracy, precision, recall, weighted F1, ROC-AUC, a confusion matrix, and an ROC curve. Each notebook saves its metrics into a shared results file to build the final comparison table.
-
-| # | Notebook | Algorithm | Problem Type | Key Concepts Demonstrated |
-|---|----------|-----------|---------------|----------------------------|
-| 1 | `classification1_LR.ipynb` | Logistic Regression | Binary Classification | Linear decision boundary via the logistic (sigmoid) function; probability-based predictions |
-| 2 | `classification2_KNN.ipynb` | KNN Classification | Binary Classification | Distance-based classification by majority vote of nearest neighbors |
-| 3 | `classification3_GNB.ipynb` | Gaussian Naive Bayes | Binary Classification | Probabilistic classification assuming feature independence and Gaussian-distributed features |
-| 4 | `classification4_DT.ipynb` | Decision Tree Classification | Binary Classification | Rule-based, non-linear decision boundaries; feature importance from tree splits |
-| 5 | `classification5_SVM.ipynb` | Support Vector Machine Classification | Binary Classification | Margin-maximizing, kernel-based classification; combines the five models' saved results into a final comparison table |
-
-## Dataset
-
-| File | Description | Used In |
-|------|-------------|---------|
-| `regression_insurance.csv` | Medical insurance records with `age`, `sex`, `bmi`, `children`, `smoker`, `region`, and the target `charges` | All 10 regression notebooks |
-| `diabetes_prediction_dataset_2000.csv` | Patient records with `gender`, `age`, `hypertension`, `heart_disease`, `smoking_history`, `bmi`, `HbA1c_level`, `blood_glucose_level`, and the binary target `diabetes` | All 5 classification notebooks |
-| `clustering_patients.csv` | Patient records with `age`, `blood_pressure_sys`, `cholesterol`, `sodium_potassium_ratio`, and `heart_rate` | Present in the dataset folder but not used by any notebook in this repository yet |
-
-## Technologies / Libraries
+### Prerequisites
 
 - Python 3
-- pandas
-- numpy
-- scikit-learn
-- matplotlib
-- seaborn
-- Jupyter Notebook
+- GitHub repository downloaded or cloned to your computer
+- Internet access for installing Python dependencies
 
-## Installation
+### 1. Download the repository
 
-Create and activate a virtual environment, then install the dependencies.
+Download the repository as a ZIP file from GitHub and extract it, or use an existing local copy.
 
-```bash
+### 2. Open the project directory
+
+Open the extracted `Bias_breakers` folder in Visual Studio Code.
+
+### 3. Create a virtual environment
+
+On Windows PowerShell:
+
+```powershell
 python -m venv .venv
 ```
 
-Windows activation:
+### 4. Install dependencies
 
-```bash
-.venv\Scripts\activate
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-macOS/Linux activation:
+### 5. Run the Streamlit dashboard
 
-```bash
-source .venv/bin/activate
+Ensure that `app.py`, `ml_engine.py`, the required datasets, and any other files referenced by the application are present.
+
+Run:
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-Then install the required packages:
+Open the local URL displayed in the terminal. It is usually:
 
-```bash
-pip install -r requirements.txt
-```
+`http://localhost:8501`
 
-## Usage
+Keep the terminal running while using the dashboard.
 
-1. Activate the virtual environment and install the dependencies as shown above.
-2. Launch Jupyter from the project root:
+## Interactive Dashboard
 
-   ```bash
-   jupyter notebook
-   ```
+The Streamlit dashboard provides a web interface for exploring the machine learning project.
 
-3. Open any notebook in the `notebooks/` folder and run the cells in order (top to bottom). Each notebook reads its dataset directly from the `dataset/` folder using a relative path, so no extra configuration is needed.
+Depending on the implemented features, users can explore datasets, visualize feature distributions, train and evaluate models, compare algorithms, inspect evaluation metrics, and examine clustering results.
 
-## Learning Objectives
+## Reproducibility and Evaluation
 
-This project is designed to build a practical understanding of:
+For fair comparisons, models should use consistent training and testing splits within each track. Preprocessing transformations should be fitted on the training data only to prevent data leakage.
 
-- Supervised learning workflows (regression and classification)
-- Train/test splitting, including stratified splitting for imbalanced classification targets
-- Feature preprocessing: outlier handling, feature engineering (interaction features), one-hot encoding, and feature scaling
-- Model training and hyperparameter tuning with `GridSearchCV` and cross-validation
-- Regularization (L1, L2, and combined Elastic Net penalties)
-- Ensemble methods (Random Forest, Gradient Boosting)
-- Distance-based learning (KNN)
-- Kernel-based learning (SVM/SVR)
-- Model evaluation using appropriate metrics for regression (R², MSE, RMSE, MAE) and classification (accuracy, precision, recall, F1, ROC-AUC)
+Random states should be fixed where applicable to improve reproducibility. Model performance should be interpreted using appropriate metrics rather than relying on a single score.
+
+## Project Team
+
+**Project:** Bias Breakers — Machine Learning Capstone  
+**Course:** 23CSE301 — Machine Learning  
+**Institution:** Amrita Vishwa Vidyapeetham  
+**Academic Year:** 2026–2027
+
+Add your team members' names and any required acknowledgements here.
 
 ## Future Improvements
 
-The following are proposed ideas and are **not currently implemented** in this repository:
+- Hyperparameter optimization for selected models.
+- Further comparison of model performance.
+- Improved interactive visualizations.
+- Public deployment of the Streamlit dashboard.
+- Additional model interpretability and error analysis.
 
-- Extend the project to use `clustering_patients.csv` for an unsupervised learning (clustering) module
-- Add a unified script or notebook that automatically aggregates and visualizes results across all regression models, similar to the existing classification comparison table
-- Add automated tests and CI to validate notebook execution
-- Experiment with additional feature engineering and advanced hyperparameter search strategies (e.g., randomized or Bayesian search)
+## Acknowledgements
 
-## License
-
-This project does not currently include a license file.
+This project is developed as part of the Machine Learning Capstone coursework. External resources and AI-assisted code scaffolding should be acknowledged where required by the course guidelines.
